@@ -1,2 +1,27 @@
-# smmwe-texture-combiner
-Combinador de texturas para el fangame de Super Mario Maker: World Engine!
+<img width="1729" height="924" alt="TC-Logo" src="https://github.com/user-attachments/assets/b5698931-2a58-41b6-bf90-ffb431f268af" />
+
+**SMM:WE Texture Combiner** es una página creada por **Papermind** el cual te dara la capacidad de añadir hasta **6** texturas al juego!
+Esta hecha a partir de Visual Studio Code y realizada en menos de 3 días con ayuda de Inteligencia Artificial.
+
+## Como Funciona
+
+Al ingresar a la página, veras como funciona a simple vista, pero aquí vendra la explicacion:
+
+La pagina consiste en que tu debes seleccionar las texturas de preferencia para juntarlas en una sola, ya que el juego no permite añadir mas de dos texturas, los archivos si o si deben ser **.zip** para que funcione.
+Una vez recopiladas las texturas (**Minimo 2**) la pagina hara lo siguiente:
+
+- Descomprimira los archivos **.zip** de todas las texturas.
+- Una vez descomprimidas, comprimira las imagenes que contiene cada una.
+- Finalmente, se descargara de forma **automatica** la textura comprimida en .zip, este tendra por nombre **combined_texture.zip**
+
+<img width="1102" height="775" alt="smmwetc" src="https://github.com/user-attachments/assets/fb0c9137-7303-46ba-95e1-5b586cfd0db5" />
+
+Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tantas vueltas y de forma rapida!
+
+## FAQ
+
+- **Se podran añadir más texturas?**: Probablemente si, apenas esta iniciando y a partir de las opiniones de los usuarios se tomara en cuenta.
+- **Qué pasa si dos texturas tienen el mismo nombre/sprites?**: El nombre da igual, lo que hara la pagina es solo descomprimir los archivos. Pero ojo con los sprites, ya que esta lo va a sobreescribir.
+- **Mi textura no se ha integrado al juego**: Asegurate que el archivo .zip tenga las imagenes, si se encuentra dentro de una carpeta la página no lo leera.
+- **Me aparecio "Error: JSZip library is not loaded"**: Revisa bien tu conexión a internet, si tu internet es lento, podria no descargar el archivo JSZip desde la CDN. También podria ser porque el CDN esta caido o bloqueado.
+- **Encontre otro error que no aparece aquí**: Si en dado caso sucediera, comunicate con papermind (**@papermente**) por Discord.
