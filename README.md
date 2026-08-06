@@ -3,7 +3,7 @@
 **SMM:WE Texture Combiner** es una página creada por **Papermind** el cual te dara la capacidad de añadir hasta **6** texturas al juego!
 Esta hecha a partir de Visual Studio Code y realizada en menos de 3 días con ayuda de Inteligencia Artificial.
 
-## Como Funciona
+## ¿Como Funciona?
 
 Al ingresar a la página, veras como funciona a simple vista, pero aquí vendra la explicacion:
 
