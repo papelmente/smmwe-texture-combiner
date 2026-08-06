@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMM:WE Texture Combiner</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <style>
+    @font-face {
+      src: url("DIN 2014 Demi.ttf") format("truetype");
+      font-family: 'DIN 2014';
+      font-weight: 500;
+    }
+
+    * {
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url("bg.png");
+      background-repeat: repeat;
+      background-position: center center;
+      background-color: #1c1c1c;
+      font-family: 'DIN 2014', sans-serif;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      position: relative;
+    }
+
+    /* BARRA SUPERIOR - BOTONES EN LAS ESQUINAS */
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between; /* Distribuye un botón a la izquierda y otro a la derecha */
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    /* TÍTULO PRINCIPAL */
+    .title-image {
+      width: 100%;
+      max-width: 345px;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+    }
+
+    /* ESTILOS DE BISELADO MARIO WONDER BASE */
+    .button, .static-box {
+      --bevel: 3px;
+      --border-width: 3px;
+      font-family: 'DIN 2014', sans-serif;
+      font-weight: 600;
+      filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.95));
+    }
+
+    .button-outline {
+      --bevel-1: calc((var(--bevel) + (var(--border-width)) * 2) - ((var(--border-width) * 0.41421)) * 2);
+      --bevel-2: calc(var(--bevel-1) + var(--border-width));
+      --bevel-3: calc(var(--bevel-2) + var(--border-width));
+      display: block;
+      margin-top: calc(var(--border-width) * -1);
+      margin-left: calc(var(--border-width) * -1);
+      padding: var(--border-width);
+      background-color: #fff;
+      clip-path: polygon(var(--bevel-2) var(--border-width), calc(100% - var(--bevel-2)) var(--border-width), 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, var(--border-width) calc(100% - var(--bevel-2)), var(--border-width) var(--bevel-2));
+      transition-property: clip-path;
+      transition-duration: .2s;
+    }
+
+    .button-shadow {
+      --padding: calc(var(--border-width) * 2);
+      --bevel-1: calc((var(--bevel) + var(--border-width)) - (var(--border-width) * 0.41421));
+      --bevel-2: calc(var(--bevel-1) + var(--border-width));
+      --bevel-3: calc(var(--bevel-2) + var(--border-width));
+      display: block;
+      padding: calc(var(--border-width) * 2) var(--padding) var(--padding) calc(var(--border-width) * 2);
+      background-color: #1d2119;
+      clip-path: polygon(var(--bevel-2) var(--border-width), calc(100% - var(--bevel-2)) var(--border-width), 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, var(--border-width) calc(100% - var(--bevel-2)), var(--border-width) var(--bevel-2));
+      transition-property: clip-path;
+      transition-duration: .2s;
+    }
+
+    .button-inside {
+      --padding-vertical: 6px;
+      display: block;
+      padding: var(--padding-vertical) 24px calc(var(--padding-vertical) - .125em);
+      background-color: #fff;
+      clip-path: polygon(var(--bevel) 0, calc(100% - var(--bevel)) 0, 100% var(--bevel), 100% calc(100% - var(--bevel)), calc(100% - var(--bevel)) 100%, var(--bevel) 100%, 0 calc(100% - var(--bevel)), 0 var(--bevel));
+      text-align: center;
+      transition-property: transform;
+      transition-duration: .2s;
+    }
+
+    /* ELEMENTOS ESTÁTICOS */
+    .static-box {
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .tab-box {
+      align-self: flex-start;
+      margin-bottom: -3px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .static-box .button-inside {
+      background-color: #1d2119;
+      color: #ffffff;
+    }
+
+    .static-box .button-text-characters-container {
+      color: #ffffff !important;
+    }
+
+    .main-row {
+      width: 100%;
+    }
+
+    .main-panel { 
+      width: 100%; 
+    }
+
+    .panel-inside {
+      padding: 16px !important;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background-color: #1d2119 !important;
+    }
+
+    /* CONTENEDOR CON SCROLL HORIZONTAL */
+    .slots-container {
+      display: flex;
+      flex: 1;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slots-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .slots-container::-webkit-scrollbar-track {
+      background: #0d0e0b;
+      border-radius: 4px;
+    }
+    .slots-container::-webkit-scrollbar-thumb {
+      background: #ffffff;
+      border-radius: 4px;
+    }
+    .slots-container::-webkit-scrollbar-thumb:hover {
+      background: #fcd200;
+    }
+
+    .slot-card {
+      flex: 1;
+      min-width: 220px;
+      background-color: #0d0e0b;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dashed-box {
+      border: 2px dashed #ffffff;
+      border-radius: 6px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .dashed-box .icon { font-size: 32px; }
+    .dashed-box .label { font-size: 14px; color: #ffffff; text-align: center; }
+
+    .panel-inside, .slots-container, .slot-card {
+      pointer-events: auto !important;
+    }
+
+    .bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .instruction-box { flex: 1; }
+
+    /* BOTONES INTERACTIVOS */
+    .button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      pointer-events: auto;
+    }
+
+    .button:hover:not(:active) .button-outline, 
+    .button:focus-visible:not(:active) .button-outline,
+    .button:hover:not(:active) .button-shadow, 
+    .button:focus-visible:not(:active) .button-shadow {
+      clip-path: polygon(var(--bevel-1) 0, calc(100% - var(--bevel-3)) 0, 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, 0 calc(100% - var(--bevel-3)), 0 var(--bevel-1));
+    }
+
+    .button:hover:not(:active) .button-inside, 
+    .button:focus-visible:not(:active) .button-inside {
+      transform: translate(calc(var(--border-width) * -1), calc(var(--border-width) * -1));
+    }
+
+    .button-combine .button-inside,
+    .button-plus .button-inside,
+    .button-lang .button-inside,
+    .button-credits .button-inside {
+      background-color: #ffffff;
+    }
+
+    .button-combine:hover .button-inside, 
+    .button-combine:focus-visible .button-inside,
+    .button-plus:hover .button-inside, 
+    .button-plus:focus-visible .button-inside,
+    .button-lang:hover .button-inside,
+    .button-credits:hover .button-inside {
+      background-color: #fcd200;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(252, 210, 0, 0.9)), radial-gradient(#fff60d 1px, rgba(0, 0, 0, 0) 0%), radial-gradient(#fff60d 1px, rgba(0, 0, 0, 0) 0%);
+      background-size: auto, 6px 6px, 6px 6px;
+      background-position: 0 0, 0 0, 3px 3px;
+      animation: scroll-background 1s linear infinite;
+    }
+
+    @keyframes scroll-background {
+      to { background-position-x: 0, -6px, -3px; }
+    }
+
+    .button-plus .button-inside {
+      padding: 12px 16px;
+      font-size: 18px;
+    }
+
+    .button-combine { flex: 1; }
+
+    .button-text-characters-container {
+      display: inline-block;
+      transform: skewX(-6deg);
+    }
+
+    .button .button-text-characters-container {
+      color: #1d2119 !important;
+    }
+
+    .button-text-character {
+      display: inline-block;
+    }
+
+    .button:hover:not(:active) .button-text-character, 
+    .button:focus-visible:not(:active) .button-text-character {
+      animation: jump 4s cubic-bezier(0.75, 0.25, 1, 2) var(--delay) infinite;
+    }
+
+    @keyframes jump {
+      5% { transform: translateY(-0.125em); }
+      10% { transform: translateY(0); }
+    }
+
+    /* =========================================================
+       MODAL Y POPUP DE CRÉDITOS
+       ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .credits-card {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      background-image: url('Credits_bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #e6e4d5;
+      border-radius: 24px 0px 24px 0px; 
+      padding: 30px 36px 24px 24px;
+      color: #1c1c1c;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      transform: scale(0.8);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .credits-card {
+      transform: scale(1);
+    }
+
+    /* Botón de cerrar la ventana (X) */
+    .close-credits-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: #1d2119;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .close-credits-btn:hover {
+      background-color: #fcd200;
+      color: #1d2119;
+      transform: scale(1.1);
+    }
+
+    .credits-card h3 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 16px;
+    }
+
+    .credit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .credit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #2b2b2b;
+      font-weight: 500;
+      gap: 12px;
+    }
+
+    .credit-item span {
+      flex: 1;
+      text-align: left;
+    }
+
+    .credit-item a {
+      color: #d6a100;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .credit-item a:hover {
+      color: #e58b00;
+      transform: scale(1.1);
+    }
+
+    .thanks-title {
+      margin-top: 10px !important;
+      margin-bottom: 6px !important;
+    }
+
+    .thanks-content {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #222222;
+    }
+
+    .tagline-text {
+      text-align: center;
+      font-size: 12px;
+      color: #666666;
+      margin-top: 12px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="top-bar">
+      <button id="credits-toggle-btn" class="button button-credits" type="button" aria-label="Créditos">
+        <span class="button-outline">
+          <span class="button-shadow">
+            <span class="button-inside" style="padding: 4px 12px; font-size: 14px;">
+              <span class="button-text-characters-container" data-i18n="creditsBtn">Créditos</span>
+            </span>
+          </span>
+        </span>
+      </button>
+
+      <button id="lang-toggle-btn" class="button button-lang" type="button">
+        <span class="button-outline">
+          <span class="button-shadow">
+            <span class="button-inside" style="padding: 4px 12px; font-size: 14px;">
+              <span id="lang-text" class="button-text-characters-container">EN</span>
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+
+    <img src="TC-Logo.png" alt="SMM:WE Texture Combiner" class="title-image">
+
+    <div class="static-box tab-box">
+      <div class="button-outline">
+        <div class="button-shadow">
+          <div class="button-inside">
+            <span class="button-text-characters-container" data-i18n="tabTitle">Pon aquí tus texturas!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-row">
+      <div class="static-box main-panel">
+        <div class="button-outline">
+          <div class="button-shadow">
+            <div class="button-inside panel-inside">
+              
+              <div class="slots-container">
+                <div class="slot-card">
+                  <div class="dashed-box">
+                    <span class="icon">📦</span>
+                    <span class="label" data-i18n="dragZip">Arrastra un archivo .zip</span>
+                  </div>
+                </div>
+
+                <div class="slot-card">
+                  <div class="dashed-box">
+                    <span class="icon">📦</span>
+                    <span class="label" data-i18n="dragZip">Arrastra un archivo .zip</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="button button-plus" type="button" aria-label="Añadir textura">
+                <span class="button-outline">
+                  <span class="button-shadow">
+                    <span class="button-inside">
+                      <span class="button-text-characters-container">
+                        <span class="button-text-character" style="--delay: 0.1s">+</span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="static-box instruction-box">
+        <div class="button-outline">
+          <div class="button-shadow">
+            <div class="button-inside">
+              <span class="button-text-characters-container" data-i18n="instruction">Dale al "+" para añadir más texturas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="button button-combine" type="button">
+        <span class="button-outline">
+          <span class="button-shadow">
+            <span class="button-inside">
+              <span class="button-text-characters-container" data-i18n="combineBtn">Combinar Texturas</span>
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+
+  <div id="credits-modal" class="modal-overlay">
+    <div class="credits-card">
+      <button id="close-credits-btn" class="close-credits-btn" type="button">✕</button>
+      
+      <h3 data-i18n="creditsTitle">Créditos</h3>
+      
+      <div class="credit-list">
+        <div class="credit-item">
+          <span>
+            <strong data-i18n="project1">Super Mario Bros. Wonder Button</strong> 
+            <span data-i18n="byWord">por</span> 
+            <a href="https://www.buttons.cool/button/XWOpQMw" target="_blank">@nicolasjesenberger</a>
+          </span>
+        </div>
+        
+        <div class="credit-item">
+          <span>
+            <strong data-i18n="project2">Super Mario Bros. Wonder Font Pack</strong> 
+            <span data-i18n="byWord">por</span> 
+            <a href="https://www.deviantart.com/wearestvyt/art/Super-Mario-Bros-Wonder-Font-Pack-1017683909" target="_blank">WeAreSTVYT</a>
+          </span>
+        </div>
+        
+        <div class="credit-item">
+          <span>
+            <strong data-i18n="project3">Pantalla de carga de Mario Wonder</strong> 
+            <span data-i18n="byWord">por</span> 
+            <a href="https://www.reddit.com/r/Mario/comments/17k867g/made_these_wallpapers_based_on_the_loading/?tl=es-419" target="_blank">Big-Stay2709</a>
+          </span>
+        </div>
+      </div>
+
+      <h3 class="thanks-title" data-i18n="thanksTitle">Agradecimientos</h3>
+      <p class="thanks-content" data-i18n="thanksText">¡Todos mis amiguitos y a ti! :3</p>
+      
+      <p class="tagline-text" data-i18n="tagline">De Engineer para Engineers.</p>
+     <p class="app-signature" data-i18n="madeBy" style="text-align: center !important; font-size: 11px !important; color: rgba(0, 0, 0, 0.4) !important; margin-top: 14px !important; margin-bottom: 0 !important; display: block !important; width: 100% !important;">Hecho por papermind (@papermente)</p>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>

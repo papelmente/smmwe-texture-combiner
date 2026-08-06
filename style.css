@@ -1,0 +1,417 @@
+@font-face {
+  src: url("https://assets.codepen.io/4175254/DIN2014-DemiBold.ttf") format("truetype");
+  font-family: 'DIN 2014';
+  font-weight: 600;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-image: url("bg.png");
+  background-repeat: repeat;
+  background-position: center center;
+  background-color: #1c1c1c;
+  font-family: 'DIN 2014', sans-serif;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+/* BISELADO Y BASES DE BOTONES */
+.button, .static-box {
+  --bevel: 3px;
+  --border-width: 3px;
+  font-family: 'DIN 2014';
+  font-weight: 600;
+  color: #1d2119;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.95));
+}
+
+.button-outline {
+  --bevel-1: calc((var(--bevel) + (var(--border-width)) * 2) - ((var(--border-width) * 0.41421)) * 2);
+  --bevel-2: calc(var(--bevel-1) + var(--border-width));
+  --bevel-3: calc(var(--bevel-2) + var(--border-width));
+  display: block;
+  margin-top: calc(var(--border-width) * -1);
+  margin-left: calc(var(--border-width) * -1);
+  padding: var(--border-width);
+  background-color: #fff;
+  clip-path: polygon(var(--bevel-2) var(--border-width), calc(100% - var(--bevel-2)) var(--border-width), 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, var(--border-width) calc(100% - var(--bevel-2)), var(--border-width) var(--bevel-2));
+  transition-property: clip-path;
+  transition-duration: .2s;
+}
+
+.button-shadow {
+  --padding: calc(var(--border-width) * 2);
+  --bevel-1: calc((var(--bevel) + var(--border-width)) - (var(--border-width) * 0.41421));
+  --bevel-2: calc(var(--bevel-1) + var(--border-width));
+  --bevel-3: calc(var(--bevel-2) + var(--border-width));
+  display: block;
+  padding: calc(var(--border-width) * 2) var(--padding) var(--padding) calc(var(--border-width) * 2);
+  background-color: #1d2119;
+  clip-path: polygon(var(--bevel-2) var(--border-width), calc(100% - var(--bevel-2)) var(--border-width), 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, var(--border-width) calc(100% - var(--bevel-2)), var(--border-width) var(--bevel-2));
+  transition-property: clip-path;
+  transition-duration: .2s;
+}
+
+.button-inside {
+  --padding-vertical: 6px;
+  display: block;
+  padding: var(--padding-vertical) 24px calc(var(--padding-vertical) - .125em);
+  background-color: #fff;
+  clip-path: polygon(var(--bevel) 0, calc(100% - var(--bevel)) 0, 100% var(--bevel), 100% calc(100% - var(--bevel)), calc(100% - var(--bevel)) 100%, var(--bevel) 100%, 0 calc(100% - var(--bevel)), 0 var(--bevel));
+  text-align: center;
+  transition-property: transform;
+  transition-duration: .2s;
+}
+
+.static-box {
+  pointer-events: none;
+  user-select: none;
+}
+
+.title-box { margin-bottom: 20px; }
+
+.tab-box {
+  align-self: flex-start;
+  margin-bottom: -3px;
+  position: relative;
+  z-index: 2;
+}
+
+.static-box .button-inside {
+  background-color: #1d2119;
+  color: #ffffff;
+}
+
+.main-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.main-panel { flex: 1; }
+
+.panel-inside {
+  padding: 16px !important;
+  display: flex;
+  gap: 16px;
+  background-color: #1d2119 !important;
+}
+
+.slot-card {
+  flex: 1;
+  background-color: #0d0e0b;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.dashed-box {
+  border: 2px dashed #ffffff;
+  border-radius: 6px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+}
+
+.dashed-box .icon { font-size: 32px; }
+.dashed-box .label { font-size: 14px; }
+
+.bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.instruction-box { flex: 1; }
+
+/* BOTONES INTERACTIVOS */
+.button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover:not(:active) .button-outline, 
+.button:focus-visible:not(:active) .button-outline,
+.button:hover:not(:active) .button-shadow, 
+.button:focus-visible:not(:active) .button-shadow {
+  clip-path: polygon(var(--bevel-1) 0, calc(100% - var(--bevel-3)) 0, 100% var(--bevel-3), 100% calc(100% - var(--bevel-1)), calc(100% - var(--bevel-1)) 100%, var(--bevel-3) 100%, 0 calc(100% - var(--bevel-3)), 0 var(--bevel-1));
+}
+
+.button:hover:not(:active) .button-inside, 
+.button:focus-visible:not(:active) .button-inside {
+  transform: translate(calc(var(--border-width) * -1), calc(var(--border-width) * -1));
+}
+
+/* BOTÓN "+" */
+.button-plus .button-inside {
+  background-color: #1d2119;
+  color: #ffffff;
+  padding: 8px 18px;
+  font-size: 20px;
+}
+
+.button-plus:hover .button-inside {
+  background-color: #ffffff;
+  color: #1d2119;
+}
+
+/* BOTÓN "COMBINAR TEXTURAS" */
+.button-combine {
+  flex: 1;
+}
+
+.button-combine .button-inside {
+  background-color: #ffffff;
+  color: #1d2119;
+}
+
+.button-combine:hover .button-inside, 
+.button-combine:focus-visible .button-inside {
+  background-color: #fcd200;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(252, 210, 0, 0.9)), radial-gradient(#fff60d 1px, rgba(0, 0, 0, 0) 0%), radial-gradient(#fff60d 1px, rgba(0, 0, 0, 0) 0%);
+  background-size: auto, 6px 6px, 6px 6px;
+  background-position: 0 0, 0 0, 3px 3px;
+  animation: scroll-background 1s linear infinite;
+}
+
+@keyframes scroll-background {
+  to {
+    background-position-x: 0, -6px, -3px;
+  }
+}
+
+.button-text-characters-container {
+  display: inline-block;
+  transform: skewX(-6deg);
+  color: #1d2119;
+}
+
+.button-text-character {
+  display: inline-block;
+}
+
+.button-combine:hover:not(:active) .button-text-character, 
+.button-combine:focus-visible:not(:active) .button-text-character {
+  animation: jump 4s cubic-bezier(0.75, 0.25, 1, 2) var(--delay) infinite;
+}
+
+@keyframes jump {
+  5% { transform: translateY(-0.125em); }
+  10% { transform: translateY(0); }
+}
+
+body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+}
+
+header, .title-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.title-image {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
+}
+
+.slots-container {
+  display: flex;
+  flex: 1;
+  gap: 16px;
+  
+  /* HABILITAR SCROLL HORIZONTAL */
+  overflow-x: auto;
+  padding-bottom: 8px; /* Espacio para que la barra no tape el borde */
+  
+  /* Scroll suave en móviles */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Evita que los slots se aplasten al añadir varios */
+.slot-card {
+  flex: 0 0 240px; /* Tamaño fijo para cada tarjeta al hacer scroll */
+  background-color: #0d0e0b;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Personalización de la barra de scroll */
+.slots-container::-webkit-scrollbar {
+  height: 8px;
+}
+.slots-container::-webkit-scrollbar-track {
+  background: #0d0e0b;
+  border-radius: 4px;
+}
+.slots-container::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 4px;
+}
+.slots-container::-webkit-scrollbar-thumb:hover {
+  background: #fcd200;
+}
+
+/* TARJETA DE CRÉDITOS CLARA (ESTILO MOCAP) */
+    .credits-card {
+      position: relative;
+      width: 100%;
+      max-width: 480px; /* Tamaño ideal según tu boceto */
+      margin: 40px auto 20px auto;
+      background-color: #e6e4d5; /* Tono claro/beige de tu imagen */
+      background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      background-size: 12px 12px;
+      
+      /* Esquinas redondeadas diagonales estilo tarjeta Wonder */
+      border-radius: 24px 0px 24px 0px; 
+      padding: 24px 36px 20px 24px;
+      color: #1c1c1c;
+      font-family: 'DIN 2014', sans-serif;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+    }
+
+.credits-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 40px auto 20px auto;
+  
+  /* FONDO CON TU NUEVA IMAGEN */
+  background-image: url('credits_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Mantén las esquinas redondeadas y el espaciado interno */
+  border-radius: 24px 0px 24px 0px; 
+  padding: 24px 36px 20px 24px;
+  color: #1c1c1c;
+  font-family: 'DIN 2014', sans-serif;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+/* Ajustes generales del modal */
+    .credits-card h3 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 16px;
+    }
+
+    .credit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .credit-item {
+      font-size: 14px;
+      color: #2b2b2b;
+      line-height: 1.4;
+    }
+
+    /* Nombre del proyecto en negrita */
+    .credit-item strong {
+      font-weight: 700;
+      color: #111111;
+    }
+
+    /* Enlace en el nombre del creador */
+    .credit-item a {
+      color: #d6a100; /* Tono amarillo/dorado legible */
+      font-weight: 700;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .credit-item a:hover {
+      color: #e58b00;
+    }
+
+    .thanks-title {
+      margin-top: 10px !important;
+      margin-bottom: 8px !important;
+    }
+
+    .thanks-content {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: #222222;
+    }
+
+    .tagline-text {
+      text-align: center;
+      font-size: 12px;
+      color: #666666;
+      margin-top: 14px;
+      font-style: italic;
+    }
+
+/* FORZAR CENTRADO Y ESTILO EN EL MODAL */
+    .credits-card .app-signature,
+    .credits-card p.app-signature,
+    p.app-signature {
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: 14px !important;
+      margin-bottom: 0 !important;
+      
+      text-align: center !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      
+      /* Color negro tenue (40% opacidad) */
+      color: rgba(0, 0, 0, 0.4) !important;
+      letter-spacing: 0.3px !important;
+    }
