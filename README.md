@@ -25,3 +25,10 @@ Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tan
 - **Mi textura no se ha integrado al juego**: Asegurate que el archivo .zip tenga las imagenes, si se encuentra dentro de una carpeta la página no lo leera.
 - **Me aparecio "Error: JSZip library is not loaded"**: Revisa bien tu conexión a internet, si tu internet es lento, podria no descargar el archivo JSZip desde la CDN. También podria ser porque el CDN esta caido o bloqueado.
 - **Encontre otro error que no aparece aquí**: Si en dado caso sucediera, comunicate con papermind (**@papermente**) por Discord.
+
+## Créditos
+
+- **Super Mario. Wonder Buttons:** [Nicolas Jesenberger](https://www.buttons.cool/button/XWOpQMw)
+- **Super Mario. Wonder Font Pack:** [WeAreSTVYT](https://www.deviantart.com/wearestvyt/art/Super-Mario-Bros-Wonder-Font-Pack-1017683909)
+- **Fondo:** [Big-Stay2709](https://www.reddit.com/r/Mario/comments/17k867g/made_these_wallpapers_based_on_the_loading/)
+- **Desarrollado por:** [papermind](https://github.com/papermente)
