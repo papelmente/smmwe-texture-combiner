@@ -323,7 +323,7 @@ header, .title-container {
   margin: 40px auto 20px auto;
   
   /* FONDO CON TU NUEVA IMAGEN */
-  background-image: url("images/credits_bg.png");
+  background-image: url('/images/credits_bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
