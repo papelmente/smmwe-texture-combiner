@@ -1,4 +1,4 @@
-<img width="1729" height="924" alt="TC-Logo" src="https://github.com/user-attachments/assets/b5698931-2a58-41b6-bf90-ffb431f268af" />
+<img width="617.5" height="345" alt="icono-gh" src="https://github.com/user-attachments/assets/137070e0-29b7-4c5b-b0f0-237c7cee3e7a" />
 
 **[SMM:WE Texture Combiner](https://papelmente.github.io/smmwe-texture-combiner/)** es una página creada por **Papermind** el cual te dara la capacidad de añadir hasta **6** texturas al juego!
 Esta hecha a partir de Visual Studio Code y realizada en menos de 3 días con ayuda de Inteligencia Artificial.
