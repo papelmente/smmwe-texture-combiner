@@ -3,12 +3,12 @@
 **SMM:WE Texture Combiner** es una página creada por **Papermind** el cual te dara la capacidad de añadir hasta **6** texturas al juego!
 Esta hecha a partir de Visual Studio Code y realizada en menos de 3 días con ayuda de Inteligencia Artificial.
 
-## ¿Como Funciona?
+## ¿Cómo Funciona?
 
-Al ingresar a la página, veras como funciona a simple vista, pero aquí vendra la explicacion:
+Al ingresar a la página, veras como funciona a simple vista, pero aquí vendra la explicación:
 
-La pagina consiste en que tu debes seleccionar las texturas de preferencia para juntarlas en una sola, ya que el juego no permite añadir mas de dos texturas, los archivos si o si deben ser **.zip** para que funcione.
-Una vez recopiladas las texturas (**Minimo 2**) la pagina hara lo siguiente:
+La página consiste en que tu debes seleccionar las texturas de preferencia para juntarlas en una sola, ya que el juego no permite añadir más de dos texturas, los archivos si o si deben ser **.zip** para que funcione.
+Una vez recopiladas las texturas (**Minimo 2**) la página hara lo siguiente:
 
 - Descomprimira los archivos **.zip** de todas las texturas.
 - Una vez descomprimidas, comprimira las imagenes que contiene cada una.
@@ -31,4 +31,4 @@ Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tan
 - **Super Mario. Wonder Buttons:** [Nicolas Jesenberger](https://www.buttons.cool/button/XWOpQMw)
 - **Super Mario. Wonder Font Pack:** [WeAreSTVYT](https://www.deviantart.com/wearestvyt/art/Super-Mario-Bros-Wonder-Font-Pack-1017683909)
 - **Fondo:** [Big-Stay2709](https://www.reddit.com/r/Mario/comments/17k867g/made_these_wallpapers_based_on_the_loading/)
-- **Desarrollado por:** [papermind](https://github.com/papermente)
+- **Hecho por:** [papermind](https://github.com/papelmente)
