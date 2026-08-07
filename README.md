@@ -14,7 +14,7 @@ Una vez recopiladas las texturas (**Minimo 2**) la página hara lo siguiente:
 - Una vez descomprimidas, comprimira las imagenes que contiene cada una.
 - Finalmente, se descargara de forma **automatica** la textura comprimida en .zip, este tendra por nombre **combined_texture.zip**
 
-<img width="1102" height="775" alt="smmwetc" src="https://github.com/user-attachments/assets/fb0c9137-7303-46ba-95e1-5b586cfd0db5" />
+<img width="1117" height="795" alt="image" src="https://github.com/user-attachments/assets/9ca35eab-e38c-4ad9-99dd-85b5ff88df78" />
 
 Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tantas vueltas y de forma rapida!
 
