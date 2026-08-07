@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentSlots >= MAX_SLOTS) {
       alert(currentLang === 'es' 
         ? `Has alcanzado el límite! Solo puedes combinar hasta ${MAX_SLOTS} texturas a la vez` 
-        : `You have reached the limit! You can only combine up to ${MAX_SLOTS} textures at once.`);
+        : `You have reached the limit! You can only combine up to ${MAX_SLOTS} textures at once`);
       return;
     }
 
@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         console.error('Error al procesar los archivos ZIP:', error);
         alert(currentLang === 'es' 
-          ? 'Ocurrio un error al procesar las texturas.. Asegurate que los archivos .zip esten correctos.' 
-          : 'An error occurred while processing the textures.. Please make sure the .zip files are valid.');
+          ? 'Ocurrio un error al procesar las texturas.. Asegurate que los archivos .zip esten correctos' 
+          : 'An error occurred while processing the textures.. Please make sure the .zip files are valid');
       } finally {
         btnCombine.disabled = false;
         btnCombine.style.opacity = '1';
