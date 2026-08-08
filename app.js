@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const MIN_SLOTS = 2;
   
   let loadedFiles = [];
+  let currentLang = 'es'; // Definida arriba para acceso global en el script
 
   // Input file oculto global
   const globalFileInput = document.createElement('input');
@@ -68,7 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleFileSelect(file, slotEl, index) {
     if (!file.name.toLowerCase().endsWith('.zip')) {
-      alert(currentLang === 'es' ? 'Por favor, selecciona un archivo comprimido .zip válido' : 'Please select a valid .zip compressed file');
+      alert(
+        currentLang === 'es'
+          ? 'Por favor, selecciona un archivo comprimido .zip válido'
+          : currentLang === 'pt'
+          ? 'Por favor, selecione um arquivo comprimido .zip válido'
+          : 'Please select a valid .zip compressed file'
+      );
       return;
     }
 
@@ -87,9 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentSlots = slotsContainer.querySelectorAll('.slot-card').length;
 
     if (currentSlots >= MAX_SLOTS) {
-      alert(currentLang === 'es' 
-        ? `Has alcanzado el límite! Solo puedes combinar hasta ${MAX_SLOTS} texturas a la vez` 
-        : `You have reached the limit! You can only combine up to ${MAX_SLOTS} textures at once`);
+      alert(
+        currentLang === 'es'
+          ? `Has alcanzado el límite! Solo puedes combinar hasta ${MAX_SLOTS} texturas a la vez`
+          : currentLang === 'pt'
+          ? `Você alcançou o limite! Você só pode combinar ${MAX_SLOTS} texturas de uma vez`
+          : `You have reached the limit! You can only combine up to ${MAX_SLOTS} textures at once`
+      );
       return;
     }
 
@@ -122,14 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================
   // LÓGICA DE COMBINACIÓN Y DESCOMPRESIÓN CON JSZIP
   // =========================================================
+  
   if (btnCombine) {
     btnCombine.addEventListener('click', async () => {
       const validFiles = loadedFiles.filter(f => f !== undefined && f !== null);
 
       if (validFiles.length < MIN_SLOTS) {
-        alert(currentLang === 'es' 
-          ? `Debes cargar al menos ${MIN_SLOTS} archivos .zip para poder combinarlos` 
-          : `You must load at least ${MIN_SLOTS} .zip files to combine them`);
+        alert(
+          currentLang === 'es'
+            ? `Debes cargar al menos ${MIN_SLOTS} archivos .zip para poder combinarlos`
+            : currentLang === 'pt'
+            ? `Você deve carregar pelo menos ${MIN_SLOTS} arquivos .zip para poder combiná-los`
+            : `You must load at least ${MIN_SLOTS} .zip files to combine them`
+        );
         return;
       }
 
@@ -165,21 +181,29 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadLink.click();
         document.body.removeChild(downloadLink);
 
-        alert(currentLang === 'es' 
-          ? 'Texturas combinadas con éxito! Tu descarga comenzará en breve :3' 
-          : 'Textures combined successfully! Your download will start shortly :3');
+        alert(
+          currentLang === 'es'
+            ? 'Texturas combinadas con éxito! Tu descarga comenzará en breve :3'
+            : currentLang === 'pt'
+            ? 'Texturas combinadas com sucesso! Seu download começará em breve :3'
+            : 'Textures combined successfully! Your download will start shortly :3'
+        );
 
       } catch (error) {
         console.error('Error al procesar los archivos ZIP:', error);
-        alert(currentLang === 'es' 
-          ? 'Ocurrio un error al procesar las texturas.. Asegurate que los archivos .zip esten correctos' 
-          : 'An error occurred while processing the textures.. Please make sure the .zip files are valid');
+        alert(
+          currentLang === 'es'
+            ? 'Ocurrió un error al procesar las texturas.. Asegúrate de que los archivos .zip estén correctos'
+            : currentLang === 'pt'
+            ? 'Ocorreu um erro ao processar as texturas.. Tenha certeza que os arquivos .zip estejam corretos'
+            : 'An error occurred while processing the textures.. Please make sure the .zip files are valid'
+        );
       } finally {
         btnCombine.disabled = false;
         btnCombine.style.opacity = '1';
       }
-    });
-  }
+    }); // 👈 Se corrigió el cierre del addEventListener
+  } // 👈 Se corrigió el cierre del if(btnCombine)
 
   // =========================================================
   // VENTANA EMERGENTE (MODAL) DE CRÉDITOS
@@ -208,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// =========================================================
+  // =========================================================
   // TRADUCCIONES E IDIOMAS
   // =========================================================
   const translations = {
@@ -226,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
       project1: "Super Mario Bros. Wonder Button",
       project2: "Super Mario Bros. Wonder Font Pack",
       project3: "Pantalla de carga de Mario Wonder",
+      project4: "Traducción al Portugués",
       thanksTitle: "Agradecimientos",
       thanksText: "Todos mis amiguitos y a ti! :3",
       tagline: "De Engineer para Engineers.",
@@ -236,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dragZip: "Drag a .zip file",
       instruction: 'Click "+" to add more textures',
       combineBtn: "Combine Textures",
-      btnLabel: "ES",
+      btnLabel: "PT",
       creditsBtn: "Credits",
 
       // Credits
@@ -245,22 +270,47 @@ document.addEventListener('DOMContentLoaded', () => {
       project1: "Super Mario Bros. Wonder Button",
       project2: "Super Mario Bros. Wonder Font Pack",
       project3: "Mario Wonder Loading Screen",
+      project4: "Portuguese translation",
       thanksTitle: "Special Thanks",
       thanksText: "All my friends and you! :3",
       tagline: "From Engineer to Engineers.",
       madeBy: "Made by papermind (@papermente)",
+    },
+    pt: {
+      tabTitle: "Coloque suas texturas aqui!",
+      dragZip: "Arraste um arquivo .zip",
+      instruction: 'Pressione "+" para adicionar mais texturas',
+      combineBtn: "Combinar Texturas",
+      btnLabel: "ES",
+      creditsBtn: "Créditos",
+
+      // Créditos
+      creditsTitle: "Créditos",
+      byWord: "por",
+      project1: "Botão do Super Mario Bros. Wonder",
+      project2: "Pack de fontes do Super Mario Bros. Wonder",
+      project3: "Tela de carregamento do Mario Wonder",
+      project4: "Tradução ao Português",
+      thanksTitle: "Agradecimentos",
+      thanksText: "Todos meus amiguinhos e você! :3",
+      tagline: "De Engineer para Engineers.",
+      madeBy: "Feito por papermind (@papermind)"
     }
   };
-
-  let currentLang = 'es';
 
   const langBtn = document.getElementById('lang-toggle-btn');
   const langText = document.getElementById('lang-text');
 
- // Lógica de traducción de etiquetas data-i18n
+  // Lógica de traducción de etiquetas data-i18n
   if (langBtn) {
     langBtn.addEventListener('click', () => {
-      currentLang = currentLang === 'es' ? 'en' : 'es';
+      const nextLang = {
+        'es': 'en',
+        'en': 'pt',
+        'pt': 'es'
+      };
+      
+      currentLang = nextLang[currentLang] || 'es';
       
       if (langText) {
         langText.textContent = translations[currentLang].btnLabel;
