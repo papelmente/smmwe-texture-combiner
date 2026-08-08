@@ -31,6 +31,7 @@ Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tan
 - **Super Mario. Wonder Buttons:** [Nicolas Jesenberger](https://www.buttons.cool/button/XWOpQMw)
 - **Super Mario. Wonder Font Pack:** [WeAreSTVYT](https://www.deviantart.com/wearestvyt/art/Super-Mario-Bros-Wonder-Font-Pack-1017683909)
 - **Fondo:** [Big-Stay2709](https://www.reddit.com/r/Mario/comments/17k867g/made_these_wallpapers_based_on_the_loading/)
+- **Traducción al Portugués:** [mom](https://discord.com/users/518021652471349250)
 - **Hecho por:** [papermind](https://github.com/papelmente)
 
 <img width="379" height="213" alt="pac-man-pacman" src="https://github.com/user-attachments/assets/bfaba800-4d97-48cf-a2f9-129a6c44cc2f" />
