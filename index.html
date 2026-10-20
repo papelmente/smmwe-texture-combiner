@@ -9,7 +9,7 @@
 
   <style>
     @font-face {
-      src: url("DIN 2014 Demi.ttf") format("truetype");
+      src: url("images/DIN 2014 Demi.ttf") format("truetype");
       font-family: 'DIN 2014';
       font-weight: 500;
     }
@@ -428,6 +428,389 @@
       margin-top: 12px;
       font-style: italic;
     }
+
+    body {
+      align-items: flex-start;
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .app-container {
+      max-width: 1000px;
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    .title-image {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 600px) {
+      .title-image {
+        max-width: 230px;
+      }
+    }
+
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .section-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 14px;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      background: #1d2119;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible,
+    .section-nav a[aria-current="page"] {
+      background: #fcd200;
+      color: #1d2119;
+      outline-offset: 3px;
+    }
+
+    .page-view {
+      width: 100%;
+    }
+
+    .page-view[hidden] {
+      display: none;
+    }
+
+    .page-heading {
+      margin: 12px 0 16px;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      text-align: center;
+      text-shadow: 2px 2px 3px #000000;
+    }
+
+    .page-intro {
+      max-width: 760px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 16px;
+    }
+
+    .content-card {
+      min-width: 0;
+      padding: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+      background: #1d2119;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .content-card h2 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .content-card p {
+      margin: 0 0 12px;
+      line-height: 1.45;
+    }
+
+    .content-card .resource-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 16px;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      background: #fcd200;
+      color: #1d2119;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .content-card .resource-button:hover {
+      background: #ffe86b;
+      transform: translateY(-2px);
+    }
+
+    .content-card .resource-button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    .resource-image {
+      display: block;
+      width: 100%;
+      margin: -2px 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 8px;
+      background: #11140f;
+      object-fit: cover;
+    }
+
+    .resource-image--banner {
+      height: 160px;
+    }
+
+    .resource-image--logo {
+      width: min(100%, 180px);
+      aspect-ratio: 1;
+      height: auto;
+      margin: -2px auto 14px;
+      object-fit: contain;
+    }
+
+    .video-frame,
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 12px 0;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 8px;
+      background: #0d0e0b;
+    }
+
+    .video-frame {
+      display: block;
+    }
+
+    .video-placeholder.has-video {
+      display: block;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .video-placeholder .video-frame {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      margin: 0;
+      border: 0;
+      border-radius: inherit;
+    }
+
+    .video-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .content-meta {
+      color: #e0dcae;
+      font-size: 0.9rem;
+    }
+
+    .advice-panel {
+      margin-top: 18px;
+      padding: 18px;
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+      background: #1d2119;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .advice-panel h2 {
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .advice-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: 10px 24px;
+      padding-left: 22px;
+      line-height: 1.5;
+    }
+
+    .advice-list li::marker {
+      color: #fcd200;
+    }
+
+    .resource-group {
+      margin-top: 20px;
+    }
+
+    .resource-group h3 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+    }
+
+    .resource-group:first-of-type {
+      margin-top: 0;
+    }
+
+    .faq-footer {
+      width: 100%;
+      margin: 8px 0 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 8px;
+      background: rgba(13, 14, 11, 0.92);
+    }
+
+    .faq-footer h2 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .faq-footer details {
+      padding: 7px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      line-height: 1.4;
+    }
+
+    .faq-footer summary {
+      min-height: 32px;
+      padding: 5px 0;
+      cursor: pointer;
+    }
+
+    .faq-footer p {
+      padding: 4px 0 8px 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .section-nav a:focus-visible,
+    .faq-footer summary:focus-visible,
+    .content-card .resource-button:focus-visible,
+    .slot-card:focus-visible {
+      outline: 3px solid #fcd200;
+    }
+
+    .slots-container {
+      min-width: 0;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+
+    .slot-card {
+      flex: 1 1 270px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .slot-card .label {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .button-plus {
+      flex: 0 0 auto;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .button-combine,
+    .section-nav a,
+    .content-card a,
+    .close-credits-btn {
+      touch-action: manipulation;
+    }
+
+    .credit-item.aldian-credit {
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.35);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .app-container {
+        gap: 12px;
+      }
+
+      .section-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-nav a {
+        padding: 8px 6px;
+      }
+
+      .resource-image {
+        height: auto;
+      }
+
+      .resource-image--banner {
+        height: 180px;
+      }
+
+      .panel-inside {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px !important;
+      }
+
+      .slots-container {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .slot-card {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+
+      .dashed-box {
+        min-height: 116px;
+        height: auto;
+        padding: 12px;
+      }
+
+      .button-plus {
+        align-self: center;
+      }
+
+      .bottom-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bottom-row > * {
+        width: 100%;
+      }
+
+      .button-combine .button-inside,
+      .instruction-box .button-inside {
+        min-height: 44px;
+      }
+
+      .credits-card {
+        max-height: calc(100dvh - 32px);
+        overflow-y: auto;
+        padding: 28px 24px 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -445,7 +828,7 @@
         </span>
       </button>
 
-      <button id="lang-toggle-btn" class="button button-lang" type="button">
+      <button id="lang-toggle-btn" class="button button-lang" type="button" aria-label="Cambiar idioma">
         <span class="button-outline">
           <span class="button-shadow">
             <span class="button-inside" style="padding: 4px 12px; font-size: 14px;">
@@ -458,6 +841,15 @@
 
     <img src="images/icono-gh.gif" alt="SMM:WE Texture Combiner" class="title-image">
 
+    <nav class="section-nav" aria-label="Secciones principales" data-site-i18n-attr="aria-label:nav.label">
+      <a href="#combiner" aria-current="page">Texture Combiner</a>
+      <a href="#install" data-site-i18n="nav.install">Instalar texturas</a>
+      <a href="#create" data-site-i18n="nav.create">Crear texturas</a>
+      <a href="#resources" data-site-i18n="nav.resources">Recursos</a>
+    </nav>
+
+    <main id="main-content" class="views">
+      <section id="combiner" class="page-view" data-view="combiner">
     <div class="static-box tab-box">
       <div class="button-outline">
         <div class="button-shadow">
@@ -475,14 +867,14 @@
             <div class="button-inside panel-inside">
               
               <div class="slots-container">
-                <div class="slot-card">
+                <div class="slot-card" role="button" tabindex="0" aria-label="Seleccionar archivo ZIP">
                   <div class="dashed-box">
                     <span class="icon">📦</span>
                     <span class="label" data-i18n="dragZip">Arrastra un archivo .zip</span>
                   </div>
                 </div>
 
-                <div class="slot-card">
+                <div class="slot-card" role="button" tabindex="0" aria-label="Seleccionar archivo ZIP">
                   <div class="dashed-box">
                     <span class="icon">📦</span>
                     <span class="label" data-i18n="dragZip">Arrastra un archivo .zip</span>
@@ -529,10 +921,134 @@
         </span>
       </button>
     </div>
+      </section>
+
+      <section id="install" class="page-view" data-view="install" hidden>
+        <h1 class="page-heading" data-site-i18n="install.title">Instalar texturas</h1>
+        <p class="page-intro" data-site-i18n="install.intro">Selecciona tu plataforma para consultar su tutorial. Los videos y las notas complementarias se añadirán cuando estén disponibles.</p>
+        <div class="content-grid">
+          <article class="content-card" id="install-android">
+            <h2 data-site-i18n="platform.android">Android</h2>
+            <div class="video-placeholder" data-video-placeholder="installAndroid">Tutorial próximamente</div>
+            <div class="guide-notes" data-guide-notes="installAndroid">
+              <p class="content-meta" data-site-i18n="install.notes">Descripción, advertencias y notas complementarias pendientes.</p>
+            </div>
+          </article>
+          <article class="content-card" id="install-pc">
+            <h2 data-site-i18n="platform.pc">PC</h2>
+            <div class="video-placeholder" data-video-placeholder="installPc">Tutorial próximamente</div>
+            <div class="guide-notes" data-guide-notes="installPc">
+              <p class="content-meta" data-site-i18n="install.notes">Descripción, advertencias y notas complementarias pendientes.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="create" class="page-view" data-view="create" hidden>
+        <h1 class="page-heading" data-site-i18n="create.title">Crear texturas</h1>
+        <p class="page-intro" data-site-i18n="create.intro">Elige tu plataforma para ver el tutorial. Los videos se añadirán cuando estén disponibles.</p>
+        <div class="content-grid">
+          <article class="content-card" id="create-android">
+            <h2 data-site-i18n="platform.android">Android</h2>
+            <div class="video-placeholder" data-video-placeholder="createAndroid">Tutorial próximamente</div>
+          </article>
+          <article class="content-card" id="create-pc">
+            <h2 data-site-i18n="platform.pc">PC</h2>
+            <div class="video-placeholder" data-video-placeholder="createPc">Tutorial próximamente</div>
+          </article>
+        </div>
+        <aside class="advice-panel" aria-labelledby="creation-advice-title">
+          <h2 id="creation-advice-title" data-site-i18n="advice.title">Aspectos y consejos para crear texturas</h2>
+          <ul class="advice-list">
+            <li><strong>Sprites:</strong> <span data-site-i18n="advice.sprites">practica crear y editar sprites con una herramienta de dibujo.</span></li>
+            <li><strong data-site-i18n="advice.alpha.title">Transparencia y canal alfa:</strong> <span data-site-i18n="advice.alpha">conserva la transparencia cuando el diseño la necesite.</span></li>
+            <li><strong data-site-i18n="advice.dimensions.title">Dimensiones y resolución:</strong> <span data-site-i18n="advice.dimensions">consulta la plantilla como referencia antes de editar.</span></li>
+            <li><strong data-site-i18n="advice.formats.title">Formatos:</strong> <span data-site-i18n="advice.formats">comprueba que el formato exportado sea compatible con tu flujo de trabajo.</span></li>
+            <li><strong data-site-i18n="advice.folders.title">Carpetas:</strong> <span data-site-i18n="advice.folders">organiza los archivos y conserva nombres fáciles de identificar.</span></li>
+            <li><strong data-site-i18n="advice.zip.title">Paquetes ZIP:</strong> <span data-site-i18n="advice.zip">revisa el contenido del paquete antes de compartirlo.</span></li>
+            <li><strong data-site-i18n="advice.errors.title">Errores comunes:</strong> <span data-site-i18n="advice.errors">comprueba dimensiones, transparencia, nombres y archivos incluidos.</span></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="resources" class="page-view" data-view="resources" hidden>
+        <h1 class="page-heading" data-site-i18n="resources.title">Recursos</h1>
+        <section class="resource-group" aria-labelledby="texture-catalog-title">
+          <h2 id="texture-catalog-title" data-site-i18n="resources.catalog">Catálogo de texturas actualizadas</h2>
+          <div class="content-grid">
+            <article class="content-card">
+              <img class="resource-image resource-image--banner" src="images/resources/1catalogotexturas.png" alt="Catálogo de paquetes de texturas" data-site-i18n-attr="alt:resources.catalogAlt">
+              <h3 data-site-i18n="resources.catalogCard">Paquetes y actualizaciones</h3>
+              <p data-site-i18n="resources.catalogDescription">Consulta los paquetes de texturas disponibles y sus actualizaciones en la comunidad.</p>
+              <a class="resource-button" href="https://discord.com/channels/1009208148592177243/1417685562856312892" target="_blank" rel="noopener noreferrer" data-site-i18n="resources.catalogButton">Ver catálogo en Discord</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="resource-group" aria-labelledby="creator-resources-title">
+          <h2 id="creator-resources-title" data-site-i18n="resources.creators">Recursos para creadores</h2>
+          <div class="content-grid">
+            <article class="content-card">
+              <img class="resource-image resource-image--banner" src="images/resources/2texturetemplate.png" alt="Plantilla de texturas originales" data-site-i18n-attr="alt:resources.templateAlt">
+              <h3 data-site-i18n="resources.template">Plantilla de texturas originales</h3>
+              <p data-site-i18n="resources.templateDescription">Accede a la plantilla de texturas originales para utilizarla como base de tus propias creaciones.</p>
+              <a class="resource-button" href="https://discord.com/channels/1009208148592177243/1223201270165147709/1421193969731112961" target="_blank" rel="noopener noreferrer" data-site-i18n="resources.templateButton">Abrir plantilla en Discord</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="resource-group" aria-labelledby="tools-title">
+          <h2 id="tools-title" data-site-i18n="resources.tools">Herramientas gratuitas para crear texturas</h2>
+          <div class="content-grid" id="tools-list"></div>
+        </section>
+
+        <section class="resource-group" aria-labelledby="community-title">
+          <h2 id="community-title" data-site-i18n="resources.community">Comunidad</h2>
+          <div class="content-grid">
+            <article class="content-card">
+              <img class="resource-image resource-image--logo" src="images/resources/6discordlogo.png" alt="Logo de Discord" data-site-i18n-attr="alt:resources.discordAlt">
+              <h3>Discord — Engine Kingdom</h3>
+              <p data-site-i18n="resources.discord">Acceso a la comunidad de Engine Kingdom.</p>
+              <a class="resource-button" href="https://discord.gg/enginekingdom" target="_blank" rel="noopener noreferrer" data-site-i18n="resources.discordButton">Unirse a Discord</a>
+            </article>
+            <article class="content-card">
+              <img class="resource-image resource-image--logo" src="images/resources/7youtubelogo.png" alt="Logo de YouTube y World Engine Academy" data-site-i18n-attr="alt:resources.youtubeAlt">
+              <h3>YouTube — World Engine Academy</h3>
+              <p data-site-i18n="resources.youtube">Canal de World Engine Academy.</p>
+              <a class="resource-button" href="https://www.youtube.com/@WorldEngineAcademy" target="_blank" rel="noopener noreferrer" data-site-i18n="resources.youtubeButton">Visitar YouTube</a>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="faq-footer">
+      <h2 data-site-i18n="faq.title">Preguntas frecuentes</h2>
+      <details>
+        <summary data-site-i18n="faq.q1">Se podran añadir más texturas?</summary>
+        <p data-site-i18n="faq.a1">Probablemente si, apenas esta iniciando y a partir de las opiniones de los usuarios se tomara en cuenta.</p>
+      </details>
+      <details>
+        <summary data-site-i18n="faq.q2">Qué pasa si dos texturas tienen el mismo nombre/sprites?</summary>
+        <p data-site-i18n="faq.a2">El nombre da igual, lo que hara la pagina es solo descomprimir los archivos. Pero ojo con los sprites, ya que esta lo va a sobreescribir.</p>
+      </details>
+      <details>
+        <summary data-site-i18n="faq.q3">Mi textura no se ha integrado al juego</summary>
+        <p data-site-i18n="faq.a3">Asegurate que el archivo .zip tenga las imagenes, si se encuentra dentro de una carpeta la página no lo leera.</p>
+      </details>
+      <details>
+        <summary data-site-i18n="faq.q4">Me aparecio "Error: JSZip library is not loaded"</summary>
+        <p data-site-i18n="faq.a4">Revisa bien tu conexión a internet, si tu internet es lento, podria no descargar el archivo JSZip desde la CDN. También podria ser porque el CDN esta caido o bloqueado.</p>
+      </details>
+      <details>
+        <summary data-site-i18n="faq.q5">Encontre otro error que no aparece aquí</summary>
+        <p data-site-i18n="faq.a5">Si en dado caso sucediera, comunicate con papermind (@papermente) por Discord.</p>
+      </details>
+    </footer>
 
   <div id="credits-modal" class="modal-overlay">
     <div class="credits-card">
-      <button id="close-credits-btn" class="close-credits-btn" type="button">✕</button>
+      <button id="close-credits-btn" class="close-credits-btn" type="button" aria-label="Cerrar créditos">✕</button>
       
       <h3 data-i18n="creditsTitle">Créditos</h3>
       
@@ -568,6 +1084,9 @@
             <a href="https://discord.com/users/518021652471349250" target="_blank">mom</a>
           </span>
         </div>
+        <div class="credit-item aldian-credit">
+          <span><strong data-site-i18n="credit.contribution">Tutoriales y Recursos</strong> <span data-i18n="byWord">por</span> <a href="https://discord.com/users/916371903902531614" target="_blank" rel="noopener noreferrer">ALDIAN</a></span>
+        </div>
       </div>
 
       <h3 class="thanks-title" data-i18n="thanksTitle">Agradecimientos</h3>
@@ -580,6 +1099,7 @@
   </div>
 
   <script src="app.js"></script>
+  <script src="site.js"></script>
 
 </body>
 </html>

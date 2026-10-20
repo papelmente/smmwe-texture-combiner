@@ -33,6 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
       globalFileInput.click();
     });
 
+    slotEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activeSlotIndex = index;
+        globalFileInput.click();
+      }
+    });
+
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       slotEl.addEventListener(eventName, (e) => {
         e.preventDefault();
@@ -107,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const newIndex = currentSlots;
     const newSlot = document.createElement('div');
     newSlot.classList.add('slot-card');
+    newSlot.setAttribute('role', 'button');
+    newSlot.setAttribute('tabindex', '0');
+    newSlot.setAttribute('aria-label', translations[currentLang].selectZip);
     
     const dragText = translations[currentLang].dragZip;
 
@@ -243,6 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
       combineBtn: "Combinar Texturas",
       btnLabel: "EN",
       creditsBtn: "Créditos",
+      selectZip: "Seleccionar archivo ZIP",
+      addTexture: "Añadir textura",
+      langToggleLabel: "Cambiar idioma",
+      closeCredits: "Cerrar créditos",
 
       // Créditos
       creditsTitle: "Créditos",
@@ -263,6 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
       combineBtn: "Combine Textures",
       btnLabel: "PT",
       creditsBtn: "Credits",
+      selectZip: "Select ZIP file",
+      addTexture: "Add texture",
+      langToggleLabel: "Change language",
+      closeCredits: "Close credits",
 
       // Credits
       creditsTitle: "Credits",
@@ -283,6 +302,10 @@ document.addEventListener('DOMContentLoaded', () => {
       combineBtn: "Combinar Texturas",
       btnLabel: "ES",
       creditsBtn: "Créditos",
+      selectZip: "Selecionar arquivo ZIP",
+      addTexture: "Adicionar textura",
+      langToggleLabel: "Alterar idioma",
+      closeCredits: "Fechar créditos",
 
       // Créditos
       creditsTitle: "Créditos",
@@ -322,6 +345,17 @@ document.addEventListener('DOMContentLoaded', () => {
           el.textContent = translations[currentLang][key];
         }
       });
+
+      document.querySelectorAll('.slot-card').forEach((slot) => {
+        slot.setAttribute('aria-label', translations[currentLang].selectZip);
+      });
+      document.querySelector('.button-plus')?.setAttribute('aria-label', translations[currentLang].addTexture);
+      creditsBtn?.setAttribute('aria-label', translations[currentLang].creditsBtn);
+      langBtn.setAttribute('aria-label', translations[currentLang].langToggleLabel);
+      closeCreditsBtn?.setAttribute('aria-label', translations[currentLang].closeCredits);
+      document.dispatchEvent(new CustomEvent('site-language-change', {
+        detail: { language: currentLang }
+      }));
     });
   }
 

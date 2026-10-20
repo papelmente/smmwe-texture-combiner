@@ -3,6 +3,8 @@
 **[SMM:WE Texture Combiner](https://papelmente.github.io/smmwe-texture-combiner/)** es una página creada por **Papermind** el cual te dara la capacidad de añadir hasta **6** texturas al juego!
 Esta hecha a partir de Visual Studio Code y realizada en menos de 3 días con ayuda de Inteligencia Artificial.
 
+Además del combinador, la página incluye secciones independientes para guías de instalación, tutoriales de creación y recursos para la comunidad.
+
 ## ¿Cómo Funciona?
 
 Al ingresar a la página, veras como funciona a simple vista, pero aquí vendra la explicación:
@@ -33,5 +35,6 @@ Listo! Tu texturas favoritas estaran unidas para ingresarlas en el juego sin tan
 - **Fondo:** [Big-Stay2709](https://www.reddit.com/r/Mario/comments/17k867g/made_these_wallpapers_based_on_the_loading/)
 - **Traducción al Portugués:** [mom](https://discord.com/users/518021652471349250)
 - **Hecho por:** [papermind](https://github.com/papelmente)
+- **Tutoriales y recursos:** [ALDIAN](https://discord.com/users/916371903902531614).
 
 <img width="379" height="213" alt="pac-man-pacman" src="https://github.com/user-attachments/assets/bfaba800-4d97-48cf-a2f9-129a6c44cc2f" />

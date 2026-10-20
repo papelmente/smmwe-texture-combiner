@@ -1,0 +1,5 @@
+127.0.0.1 - - [20/Oct/2026 14:21:28] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 14:21:28] "GET /images/bg.png HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 14:21:28] "GET /images/credits_bg.png HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 14:21:29] "GET /images/icono-gh.gif HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 14:21:39] "GET /images/DIN%202014%20Demi.ttf HTTP/1.1" 200 -
